@@ -19,6 +19,18 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  favoriteChefs: [
+    {
+      chefId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Chef',
+      },
+      order: {
+        type: Number,
+        default: 0,
+      }
+    }
+  ]
 }, { timestamps: true })
 
 UserSchema.pre('save', async function (next) {
