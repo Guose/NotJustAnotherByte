@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const { searchRecipes } = require('../controllers/searchRecipeController')
+const { getCurrentUser } = require('../controllers/userController')
 const auth = require('../middleware/authMiddleware')
 
-router.post('/', auth, searchRecipes)
+router.get('/me', auth, getCurrentUser)
 
 module.exports = router

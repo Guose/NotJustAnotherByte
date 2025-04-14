@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-
 // username: guose79
 // password: Mu5fXW5a1Q1b9p4D
+const mongoose = require('mongoose')
+
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI)

@@ -2,7 +2,7 @@ const Recipe = require('../models/Recipe');
 
 const getAllRecipes = async (req, res) => {
   try {
-    const recipes = await Recipe.find({ user: req.user.userId}).sort({ createdAt: -1 })
+    const recipes = await Recipe.find()
     res.status(200).json(recipes)
   } catch (error) {
     console.error('Get Recipes Error:', error.message)

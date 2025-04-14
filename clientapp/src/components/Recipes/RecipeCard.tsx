@@ -1,7 +1,7 @@
-import { RecipeSearch } from '@/models/recipe'
+import { RecipeSearchResponse } from '@/models/recipe'
 
 type Props = {
-  recipe: RecipeSearch
+  recipe: RecipeSearchResponse
 }
 
 const RecipeCard = ({ recipe }: Props) => {

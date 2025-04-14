@@ -9,6 +9,7 @@ const generateToken = (user) => {
 
 const registerUser = async (req, res) => {
   try {
+    console.log('req.body:', req.body)
     const { email, password, name, phone } = req.body
     const existingUser = await User.findOne({ email })    
     if (existingUser) {
@@ -16,7 +17,12 @@ const registerUser = async (req, res) => {
     }
     
     const user = await User.create({ email, phone, password, name })    
+    console.log('User created:', user) // Log the created user for debugging
     const token = generateToken(user)
+
+    console.log('Token:', token) // Log the token to the console for debugging
+
+    localStorage.setItem('token', token)
 
     res.status(201).json({
       id: user._id,
@@ -32,13 +38,18 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
+    console.log('req.body:', req.body)
     const { email, password } = req.body
     const user = await User.findOne({ email })
     if (!user || !(await user.comparePassword(password))) {
       return res.status(401).json({ error: 'Invalid email or password' })
     }
 
-    const token = generateToken(user)
+    const token = generateToken(user)    
+
+    //localStorage.setItem('token', token)
+
+    console.log('Token:', token)
 
     res.status(200).json({
       user: {

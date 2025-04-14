@@ -1,8 +1,8 @@
+import { Ingredient } from "./ingredient"
 export interface Recipe {
   id?: string
   title: string
-  description: string
-  ingredients: string[]
+  ingredients: Ingredient[]
   instructions: string[]
   imageUrl?: string
   prepTimeMinutes?: number
@@ -13,7 +13,7 @@ export interface Recipe {
   user?: string
 }
 
-export interface RecipeSearch {
+export interface RecipeSearchResponse {
   title: string
   by: string
   url: string

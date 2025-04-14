@@ -6,6 +6,8 @@ const authRoutes = require('./routes/authRoutes')
 const recipeRoutes = require('./routes/recipeRoutes')
 const shoppingListRoutes = require('./routes/shoppingListRoutes')
 const searchRecipeRoutes = require('./routes/searchRecipeRoutes')
+const chefRoutes = require('./routes/chefRoutes')
+const userRoutes = require('./routes/userRoutes')
 
 const connectDb = require('./config/db')
 connectDb()
@@ -22,7 +24,9 @@ app.use(express.json())
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/recipes', recipeRoutes)
 app.use('/api/v1/shopping-list', shoppingListRoutes)
+app.use('/api/v1/chefs', chefRoutes)
 app.use('/api/v1/recipes/search', searchRecipeRoutes)
+app.use('/api/v1/users', userRoutes)
 
 app.get('/', (req, res) => {
   res.send('Welcome to Not Just Another Byte API.')
