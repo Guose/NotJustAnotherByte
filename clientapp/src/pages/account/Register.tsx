@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { registerUser } from '@/api/authApi'
 import { toast } from 'react-hot-toast'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/useAuthHooks'
 import { useNavigate } from 'react-router-dom'
 
 export default function Register() {

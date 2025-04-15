@@ -12,10 +12,10 @@ export async function loginUser(credentials: { email: string; password: string }
     if (!response.ok) {
       const err = await response.json();
       throw new Error(err.error || 'Login failed')
-    }
-
-    const data = await response.json()
-    return data
+  }
+  const data = await response.json()
+  localStorage.setItem('token', data.token)
+  return data
 }
 
 export async function registerUser(data: {

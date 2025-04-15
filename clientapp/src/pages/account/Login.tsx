@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import { loginUser } from '@/api/authApi'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks/useAuthHooks'
 
 export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' })

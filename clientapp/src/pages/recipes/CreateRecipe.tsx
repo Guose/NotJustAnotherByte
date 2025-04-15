@@ -1,5 +1,6 @@
-import RecipeForm, { RecipeFormState } from '@/pages/recipes/RecipeForm'
-import { useAddRecipe } from '@/hooks/Recipe'
+import RecipeForm, { RecipeFormState } from '@/components/Recipes/RecipeForm'
+import { useAddRecipe } from '@/hooks/RecipeHooks'
+import { Step } from '@/models/step'
 
 export default function CreateRecipe() {
   const { mutate } = useAddRecipe()
@@ -7,8 +8,24 @@ export default function CreateRecipe() {
   const handleCreate = (form: RecipeFormState) => {
     mutate({
       ...form,
-      ingredients: form.ingredients.split(',').map((i) => i.trim()),
-      instructions: form.instructions.split(',').map((i) => i.trim()),
+      ingredients: form.ingredients.map((i) => ({
+        ...i,
+        name: i.name.trim(),
+        quantity: i.quantity || 1,
+        measurement: i.measurement || '',
+        unit: i.unit || '',
+        _id: i._id || '',
+      })),
+      instructions: (form.instructions as Step[]).map((step) => ({
+        ...step,
+        order: step.order,
+        instruction: step.instruction,
+        durationSeconds: step.durationSeconds,
+        _id: step._id,
+        subSteps: step.subSteps
+      })),
+      id: '',
+      sourceUrl: ''
     })
   }
 

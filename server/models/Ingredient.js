@@ -10,6 +10,13 @@ const IngredientSchema = new mongoose.Schema({
     min: 0
   },
 
+  // form of ingredient
+  form: {
+    type: String,
+    required: false,
+    enum: ['sliced', 'diced', 'chopped', 'can', 'package']
+  },
+
   // Optional fraction (e.g., 1/4, 1/2)
   measurement: {
     type: String,
@@ -23,7 +30,7 @@ const IngredientSchema = new mongoose.Schema({
     enum: [
       'g', 'kg', 'oz', 'lb', 'ml', 'l', 'tsp', 'tbsp', 'cup',
       'pint', 'quart', 'gallon', 'stalk', 'leaf',
-      'bunch', 'head', 'piece', 'slice', 'clove', 'can', 'package'
+      'bunch', 'head', 'piece', 'clove'
     ],
     required: true
   }

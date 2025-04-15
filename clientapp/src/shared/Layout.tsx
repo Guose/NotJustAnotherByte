@@ -1,5 +1,5 @@
 import { Outlet, Link } from "react-router-dom"
-import { useAuth } from "@/hooks/useAuth"
+import { useAuth } from "@/hooks/useAuthHooks"
 
 export default function Layout() {
   const { user, logout } = useAuth()

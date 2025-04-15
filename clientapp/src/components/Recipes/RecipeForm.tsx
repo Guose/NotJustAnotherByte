@@ -1,4 +1,8 @@
 import React, { useState } from "react"
+import AddIngredientHandler from "@/services/AddIngredientHandler"
+import AddStepHandler from "@/services/AddStepHandler"
+import { Step } from '@/models/step'
+import { Ingredient } from "@/models/ingredient"
 
 type RecipeFormProps = {
   onSubmit: (recipe: RecipeFormState) => void
@@ -7,9 +11,9 @@ type RecipeFormProps = {
 
 export type RecipeFormState = {
   title: string
-  description: string
-  ingredients: string
-  instructions: string
+  author: string
+  ingredients: Ingredient[]
+  instructions: Step[]
   imageUrl: string
   servings: number
 }
@@ -18,9 +22,9 @@ export default function RecipeForm({ onSubmit, initialValues }: RecipeFormProps)
   const [form, setForm] = useState<RecipeFormState>(
     initialValues || {
       title: '',
-      description: '',
-      ingredients: '',
-      instructions: '',
+      author: '',
+      ingredients: [],
+      instructions: [],
       imageUrl: '',
       servings: 1,
     }
@@ -46,26 +50,33 @@ export default function RecipeForm({ onSubmit, initialValues }: RecipeFormProps)
         className="block w-full mb-3 p-2 border"
       />
       <textarea
-        name="description"
-        placeholder="Short Description"
-        value={form.description}
+        name="author"
+        placeholder="Author"
+        value={form.author}
         onChange={handleChange}
         className="block w-full mb-3 p-2 border"
       />
-      <textarea
-        name="ingredients"
-        placeholder="Ingredients (comma separated)"
-        value={form.ingredients}
-        onChange={handleChange}
-        className="block w-full mb-3 p-2 border"
+
+      <AddIngredientHandler
+        ingredients={form.ingredients}
+        onAdd={(ingredient) =>
+          setForm((prev) => ({
+            ...prev,
+            ingredients: [...prev.ingredients, ingredient],
+          }))
+        }
       />
-      <textarea
-        name="instructions"
-        placeholder="Instructions"
-        value={form.instructions}
-        onChange={handleChange}
-        className="block w-full mb-3 p-2 border"
-      />
+
+      <AddStepHandler
+        steps={form.instructions}
+        onAdd={(step) =>
+          setForm((prev) => ({
+            ...prev,
+            instructions: [...prev.instructions, step],
+          }))
+        }
+        />
+      
       <input
         name="servings"
         type="number"
