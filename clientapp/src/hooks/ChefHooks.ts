@@ -15,7 +15,6 @@ const useFetchChefs = (page: number) => {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         }
       })
-      console.log('response.data:', response.data)
       return response.data
     },
     placeholderData: (previousData) => previousData,

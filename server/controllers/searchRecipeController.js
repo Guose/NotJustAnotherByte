@@ -8,7 +8,7 @@ const SERP_API_KEY = process.env.SERP_API_KEY
 
 exports.searchRecipes = async (req, res) => {
   const { query } = req.body
-  const userId = req.user?._id
+  const userId = req.user?._id || req.user?.id
 
   if (!query || !userId) {
     return res.status(400).json({ error: 'Missing search query, chefName, or userId' })
@@ -106,6 +106,12 @@ exports.searchRecipes = async (req, res) => {
     } catch {
       continue
     }
+  }
+
+  if (results.length === 0) {
+    return res.status(404).json({
+      error: 'No recipes found from your favorite chefs. Consider updating user preferences.',
+    })
   }
 
   return res.status(200).json(results)

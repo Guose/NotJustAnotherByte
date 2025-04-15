@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
-const Chef = require('../models/Chef') // adjust if path differs
+const Chef = require('../models/Chef')
 
 dotenv.config()
 
@@ -29,7 +29,10 @@ const chefs = [
 
 async function seed() {
   try {
-    await mongoose.connect('mongodb+srv://guose79:Mu5fXW5a1Q1b9p4D@cluster0.veidnpp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
 
     for (const chef of chefs) {
       const exists = await Chef.findOne({ slug: chef.slug })

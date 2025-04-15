@@ -11,6 +11,8 @@ router.post('/', auth, recipeController.createRecipe)
 
 router.put('/:id', auth, recipeController.updateRecipe)
 
+router.patch('/favorite/:id', auth, recipeController.updateRecipe)
+
 router.delete('/:id', auth, recipeController.deleteRecipe)
 
 module.exports = router

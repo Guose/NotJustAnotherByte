@@ -1,9 +1,13 @@
 import { Ingredient } from "./ingredient"
+import { Step } from './step'
 export interface Recipe {
-  id?: string
+  _id: string
   title: string
+  author: string
+  isFavorite?: boolean
   ingredients: Ingredient[]
-  instructions: string[]
+  steps: Step[]
+  sourceUrl: string
   imageUrl?: string
   prepTimeMinutes?: number
   cookTimeMinutes?: number
@@ -13,9 +17,10 @@ export interface Recipe {
   user?: string
 }
 
-export interface RecipeSearchResponse {
+export interface RecipeCardResponse {
+  _id: string
   title: string
   by: string
   url: string
-  image: string
+  image?: string
 }

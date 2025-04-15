@@ -17,8 +17,11 @@ const RecipeSchema = new mongoose.Schema(
     chefName: { type: String },
     query: { type: String },
     isSavedSearch: { type: Boolean, default: false },
+    isFavorite: { type: Boolean, default: false },
   },
   { timestamps: true }
 )
+
+RecipeSchema.index({ user: 1, query: 1, chefName: 1 }, { unique: true })
 
 module.exports = mongoose.model('Recipe', RecipeSchema)
